@@ -25,6 +25,6 @@
     "extension_pages": "script-src 'self'; object-src 'self'"
   },
   "minimum_chrome_version": "88",
-  "author": "Your Name",
-  "homepage_url": "https://github.com/yourusername/tabvault"
+  "author": "Yared",
+  "homepage_url": "https://github.com/yaredgit/tabvault"
 } 
