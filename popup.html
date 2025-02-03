@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>TabVault</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      width: 300px;
+      padding: 10px;
+      font-family: Arial, sans-serif;
+      min-width: 250px;  /* Add minimum width */
+    }
+    .button {
+      width: 100%;
+      padding: 10px;
+      margin: 6px 0;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      font-size: 13px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .button:hover {
+      background-color: #45a049;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+    .button:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .button:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #fff, 0 0 0 4px #4CAF50;
+    }
+    .button-danger {
+      background-color: #f44336;
+      background-image: linear-gradient(to bottom right, #f44336, #e53935);
+    }
+    .button-danger:hover {
+      background-color: #d32f2f;
+      background-image: linear-gradient(to bottom right, #e53935, #d32f2f);
+    }
+    .button-danger:focus {
+      box-shadow: 0 0 0 2px #fff, 0 0 0 4px #f44336;
+    }
+    .button-restore {
+      padding: 6px 12px !important;
+      font-size: 12px;
+      background-image: linear-gradient(to bottom right, #4CAF50, #43A047);
+    }
+    .button-restore-all {
+      background-color: #4CAF50;
+      background-image: linear-gradient(to bottom right, #4CAF50, #43A047);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-size: 12px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: all 0.2s ease;
+    }
+    .button-restore-all:hover {
+      background-color: #45a049;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+    .button-delete {
+      width: 24px !important;
+      height: 24px !important;
+      min-width: 24px;
+      padding: 0 !important;
+      background-color: #f44336;
+      background-image: linear-gradient(to bottom right, #f44336, #e53935);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: all 0.2s ease;
+    }
+    .button-delete:hover {
+      background-color: #d32f2f;
+      background-image: linear-gradient(to bottom right, #e53935, #d32f2f);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+    .saved-tabs {
+      margin-top: 8px;
+      max-height: 300px;
+      overflow-y: auto;
+      scrollbar-width: thin;  /* Better scrollbar */
+    }
+    .tab-item {
+      display: flex;
+      align-items: center;
+      margin: 5px 0;
+      padding: 5px;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+    }
+    .tab-item:hover {
+      background-color: #f5f5f5;  /* Subtle hover effect */
+    }
+    .tab-title {
+      flex-grow: 1;
+      margin-right: 10px;
+      overflow: hidden;
+      text-overflow: ellipsis;  /* Handle long titles better */
+      white-space: nowrap;
+    }
+    .button-container {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+    .tab-group {
+      margin: 10px 0;
+      padding: 12px;
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    .group-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 8px;
+      margin-bottom: 8px;
+      border-bottom: 1px solid #ddd;
+    }
+    .group-actions {
+      display: flex;
+      gap: 8px;  /* Increased gap between buttons */
+      align-items: center;  /* Ensure vertical alignment */
+    }
+    .info-text {
+      font-size: 11px;
+      color: #666;
+      margin: 8px 0;
+      padding: 8px 8px 8px 42px; /* Increased left padding */
+      position: relative;
+      line-height: 1.4;
+    }
+    .info-text::before {
+      content: "Note:";
+      color: #4CAF50;
+      font-weight: 600;
+      position: absolute;
+      left: 8px;
+      width: 34px; /* Fixed width for "Note:" */
+    }
+  </style>
+</head>
+<body>
+  <button id="saveCurrentTab" class="button" aria-label="Save Current Tab and Close">
+    Save & Close Tab
+  </button>
+  <button id="saveAllTabs" class="button" aria-label="Save All Tabs and Close Window">
+    Save & Close All Tabs
+  </button>
+  <button id="clearAllTabs" class="button button-danger" aria-label="Clear All Saved Tabs">
+    Clear All Saved
+  </button>
+  
+  <!-- Add an info section -->
+  <div class="info-text">
+    Tabs are automatically removed when restored
+  </div>
+  
+  <div class="saved-tabs" id="savedTabs" role="list" aria-label="Saved Tabs"></div>
+  <script src="popup.js"></script>
+</body>
+</html> 

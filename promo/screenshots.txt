@@ -1,0 +1,11 @@
+Screenshot 1: Main Interface
+- Open several tabs in Chrome
+- Open TabVault popup
+- Show saved tabs list with a mix of different website titles
+- Capture the entire browser window
+
+Screenshot 2: Features Demo
+- Split the screenshot into 3 sections showing:
+  1. Saving a single tab
+  2. Saving multiple tabs
+  3. Restoring tabs 

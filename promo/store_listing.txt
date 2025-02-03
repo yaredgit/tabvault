@@ -1,0 +1,30 @@
+Short Description (up to 132 characters):
+Save and restore tabs with a single click - a minimalist temporary tab manager that keeps your bookmarks clean.
+
+Detailed Description:
+TabVault is a lightweight extension that helps you manage your tabs without cluttering your bookmarks.
+
+✨ Features:
+• Save current tab with one click
+• Save all tabs at once
+• Quickly restore tabs when needed
+• Clean, minimalist interface
+• No permanent bookmarks created
+• Easy tab management
+
+🎯 Perfect for:
+• Research sessions you want to save for later
+• Temporarily closing tabs to free up memory
+• Organizing work/study materials
+• Quick tab management without bookmark clutter
+
+🚀 How to use:
+1. Click the green vault icon in your toolbar
+2. Use 'Save Current Tab' or 'Save All Tabs'
+3. Restore tabs anytime with a single click
+4. Clear all saved tabs when you're done
+
+TabVault is designed to be simple, fast, and efficient - helping you manage your tabs without the overhead of traditional bookmarking.
+
+Privacy Notice:
+TabVault respects your privacy. All tab information is stored locally on your device using Chrome's storage API. No data is transmitted to external servers. 
