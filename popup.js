@@ -117,8 +117,23 @@ async function loadSavedTabs() {
         `;
         
         // Add restore all handler
-        groupHeader.querySelector('.button-restore-all').addEventListener('click', () => {
-          groupTabs.forEach(tab => restoreTab(tab.id, tab.url));
+        groupHeader.querySelector('.button-restore-all').addEventListener('click', async () => {
+          try {
+            // First create all tabs
+            await Promise.all(groupTabs.map(tab => chrome.tabs.create({ url: tab.url })));
+            
+            // Then remove all tabs from storage at once
+            const savedTabs = await chrome.storage.local.get('tabs');
+            const groupIds = groupTabs.map(tab => tab.id);
+            savedTabs.tabs = savedTabs.tabs.filter(tab => !groupIds.includes(tab.id));
+            await chrome.storage.local.set(savedTabs);
+            
+            // Refresh the display
+            loadSavedTabs();
+          } catch (error) {
+            console.error('Error restoring group:', error);
+            alert('Error restoring tabs. Please try again.');
+          }
         });
         
         // Add delete group handler
